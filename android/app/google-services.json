@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "713580110115",
+    "project_id": "velo-demo-firebase",
+    "storage_bucket": "velo-demo-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:713580110115:android:6b05a82ce3681aaaaf6c96",
+        "android_client_info": {
+          "package_name": "com.example.firebasedemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "713580110115-ksce1vmkdl991et4p5nc025hv8k8bbt0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAg7xB3ja2XEfis3LhyKM4GZSzHZirOgjI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "713580110115-ksce1vmkdl991et4p5nc025hv8k8bbt0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "713580110115-ptcbjt49220oafu377jjhfdp2jgg68ji.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.firebasedemo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
