@@ -39,11 +39,30 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  List<String> docIDs = [];
+//get docIDs
+
+  Future getDoctId() async {
+    await FirebaseFirestore.instance.collection('sneakers').get().then(
+          (snapshot) => snapshot.docs.forEach((document) {
+            print(document.reference);
+            docIDs.add(document.reference.id);
+          }),
+        );
+  }
+
+  @override
+  void initState() {
+    getDoctId();
+    super.initState();
+  }
+
   String gameId = "Loading...";
   @override
   Widget build(BuildContext context) {
-    final ButtonStyle style =
-        ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
+    final ButtonStyle style = ElevatedButton.styleFrom(
+        textStyle: const TextStyle(fontSize: 20),
+        backgroundColor: Color(0xff885566));
 
     return Center(
       child: Column(
@@ -59,6 +78,20 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             },
             child: const Text('Start A New Game'),
           ),
+          Expanded(
+              child: FutureBuilder(
+            future: getDoctId(),
+            builder: (context, snapshot) {
+              return ListView.builder(
+                  itemCount: docIDs.length,
+                  itemBuilder: (context, index) {
+                    // ignore: prefer_const_constructors
+                    return ListTile(
+                      title: Text(docIDs[index]),
+                    );
+                  });
+            },
+          ))
         ],
       ),
     );
