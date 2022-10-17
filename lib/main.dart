@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebasedemo/firebase_options.dart';
+import 'package:firebasedemo/reaad%20data/get_user_name.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
@@ -51,12 +52,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         );
   }
 
-  @override
-  void initState() {
-    getDoctId();
-    super.initState();
-  }
-
   String gameId = "Loading...";
   @override
   Widget build(BuildContext context) {
@@ -86,8 +81,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   itemCount: docIDs.length,
                   itemBuilder: (context, index) {
                     // ignore: prefer_const_constructors
-                    return ListTile(
-                      title: Text(docIDs[index]),
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListTile(
+                        title: GetUserName(documentId: docIDs[index]),
+                        tileColor: Colors.grey[200],
+                      ),
                     );
                   });
             },
