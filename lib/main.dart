@@ -82,7 +82,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   itemBuilder: (context, index) {
                     // ignore: prefer_const_constructors
                     return Padding(
-                      padding: const EdgeInsets.all(12.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: ListTile(
                         title: GetUserName(documentId: docIDs[index]),
                         tileColor: Colors.grey[200],
