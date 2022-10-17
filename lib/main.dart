@@ -22,6 +22,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: _title,
+      routes: {
+        '/add': ((context) => const SignInForm())
+      },
       home: Scaffold(
         appBar: AppBar(
             backgroundColor: Color(0xff885566), title: const Text(_title)),
@@ -125,6 +128,7 @@ class SignInFormState extends State<SignInForm> {
             //padding: EdgeInsets.symmetric(horizontal: 15),
             child: TextFormField(
               decoration: const InputDecoration(labelText: 'First Name'),
+
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your first name.';
@@ -193,6 +197,7 @@ class SignInFormState extends State<SignInForm> {
               decoration: const InputDecoration(
                   labelText:
                       'Interests, can be general like "Hiking", or "Art"'),
+             
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Enter some interests';
@@ -201,11 +206,14 @@ class SignInFormState extends State<SignInForm> {
               onSaved: (val) => setState(() => _user.interests = val!),
             ),
           ),
+          
           ListTile(
-            title: const Text('Option 1'),
+            title: const Text('Suzie'),
+            
             trailing: Image.network(
                 'https://static.wixstatic.com/media/7bdcd4_0d1e566d72e74985b799ccc17431ac3b~mv2.png'),
             leading: Radio<ProfileAvatars>(
+            
               value: ProfileAvatars.avatar1,
               groupValue: _character,
               onChanged: (ProfileAvatars? value) {
@@ -216,7 +224,7 @@ class SignInFormState extends State<SignInForm> {
             ),
           ),
            ListTile(
-            title: const Text('Option 2'),
+            title: const Text('Jason'),
             trailing: Image.network(
                 'https://static.wixstatic.com/media/7bdcd4_8ff1899c57f9423dac4da464c275b29f~mv2.png'),
             leading: Radio<ProfileAvatars>(
@@ -230,7 +238,7 @@ class SignInFormState extends State<SignInForm> {
             ),
           ),
            ListTile(
-            title: const Text('Option 3'),
+            title: const Text('Kitty'),
             trailing: Image.network(
                 'https://static.wixstatic.com/media/7bdcd4_1a68ac8c267b4f4db1554b67b8c780b0~mv2.png'),
             leading: Radio<ProfileAvatars>(
@@ -244,7 +252,7 @@ class SignInFormState extends State<SignInForm> {
             ),
           ),
            ListTile(
-            title: const Text('Option 4'),
+            title: const Text('Ghost Skull'),
             trailing: Image.network(
                 'https://static.wixstatic.com/media/7bdcd4_4ac7dc7e305147f6aed9641c4713a2f8~mv2.png'),
             leading: Radio<ProfileAvatars>(
@@ -258,7 +266,7 @@ class SignInFormState extends State<SignInForm> {
             ),
           ),
            ListTile(
-            title: const Text('Option 5'),
+            title: const Text('Skull'),
             trailing: Image.network(
                 'https://static.wixstatic.com/media/7bdcd4_4b3388196a6648bcbbfc32baee4ef5f0~mv2.png'),
             leading: Radio<ProfileAvatars>(
@@ -275,10 +283,11 @@ class SignInFormState extends State<SignInForm> {
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               onPressed: () {
+              final FirebaseFirestore _db = FirebaseFirestore.instance;
+
                 // Validate returns true if the form is valid, or false otherwise.
                 if (_formKey.currentState!.validate()) {
-                  // If the form is valid, display a snackbar. In the real world,
-                  // you'd often call a server or save the information in a database.
+                  // DatabaseService service = DatabaseService();
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Processing Data')),
                   );
@@ -292,28 +301,22 @@ class SignInFormState extends State<SignInForm> {
     ),
     );
   }
+
+
+final inputDecoration = InputDecoration(
+border: OutlineInputBorder(
+borderRadius: BorderRadius.circular(8.0),
+borderSide: const BorderSide(
+    color: Colors.redAccent,
+    width: 2,
+)));
 }
-
-// class SecondScreen extends StatelessWidget {
-//   const SecondScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Second Screen'),
-//       ),
-//       body: Center(
-//         child: ElevatedButton(
-//           onPressed: () {
-//             // Navigate back to first screen when tapped.
-//           },
-//           child: const Text('Go back!'),
-//         ),
-//       ),
-//     );
-//   }
-// }
+  const textStyle = TextStyle(
+  color: Colors.white,
+  fontSize: 22.0,
+  letterSpacing: 1,
+  fontWeight: FontWeight.bold,
+);
 
 var db = FirebaseFirestore.instance;
 Future<void> _startNewGame() {
@@ -330,3 +333,8 @@ Future<void> _startNewGame() {
 
   return batch.commit();
 }
+
+
+  addEmployee(User userData) async {
+    // await _db.collection("Employees").add(userData.toMap());
+  }
